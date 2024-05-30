@@ -14,15 +14,30 @@ public class Order {
     protected Customer customer;
 
     //Costruttori
-    public Order(LocalDate orderDate, LocalDate deliveryDate, List<Product> products, Customer customer) {
+    public Order(List<Product> products, Customer customer) {
         Random rndId = new Random();
         this.id = rndId.nextInt(200000, 300000);
-        this.orderDate = orderDate;
-        this.deliveryDate = deliveryDate;
         this.products = products;
         this.customer = customer;
 
     }
 
     //Metodi
+
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "customer=" + customer +
+                ", products=" + products +
+                '}';
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
 }
