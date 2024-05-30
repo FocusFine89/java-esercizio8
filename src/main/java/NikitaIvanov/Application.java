@@ -10,6 +10,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Application {
@@ -72,8 +73,8 @@ public class Application {
 
         List<Stream<Double>> MediaimportoOrdini = listaPerOrdine.stream().map(prodotti -> prodotti.stream().map(prodotto -> prodotto.getPrice())).toList();
         List<Double> prezzi = MediaimportoOrdini.stream().flatMap(stream -> stream).toList();
-        
-        prezzi.forEach(System.out::println);
+        double mediaPrezzi = prezzi.stream().collect(Collectors.averagingDouble(Double::doubleValue));
+        System.out.println("la media di tutti gli ordini è: " + mediaPrezzi);
 
 
     }
