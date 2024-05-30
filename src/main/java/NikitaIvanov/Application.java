@@ -31,13 +31,33 @@ public class Application {
             Random rnmd = new Random();
             return new Product(faker.book().title(), "Books", rnmd.nextDouble(1, 100));
         };
-        //Fine creazione prodotti
+        //Fine creazione libri
+
+        //Funzione Creazione animali
+        Supplier<Product> animalSupplier = () -> {
+            Faker faker = new Faker();
+            Random rnmd = new Random();
+            return new Product(faker.animal().name(), "Animals", rnmd.nextDouble(1, 100));
+        };
+        //Fine creazione animali
+
+        //Funzione Creazione birre
+        Supplier<Product> beerSupplier = () -> {
+            Faker faker = new Faker();
+            Random rnmd = new Random();
+            return new Product(faker.beer().name(), "Beer", rnmd.nextDouble(1, 100));
+        };
+        //Fine creazione birre
 
 
         //Lista clienti e prodotti
         List<Customer> customerList = new ArrayList<>();
         List<Product> productList = new ArrayList<>();
         List<Order> orderList = new ArrayList<>();
+        List<Product> animalsProduct = new ArrayList<>();
+        List<Product> beerProduct = new ArrayList<>();
+        List<Product> allProductsList = new ArrayList<>();
+
         //Fine Lista
 
 
@@ -46,6 +66,8 @@ public class Application {
         for (int i = 0; i < 5; i++) {
             customerList.add(customerSupplier.get());
             productList.add(bookSupplier.get());
+            animalsProduct.add(animalSupplier.get());
+            beerProduct.add(beerSupplier.get());
         }
 
         Order ordine1 = new Order(productList, customerList.getFirst());
@@ -58,6 +80,9 @@ public class Application {
         orderList.add(ordine3);
         orderList.add(ordine4);
         orderList.add(ordine5);
+        allProductsList.addAll(productList);
+        allProductsList.addAll(animalsProduct);
+        allProductsList.addAll(beerProduct);
 
 
         //Fine Generazione Clienti, Prodotti e ordini .
@@ -75,7 +100,10 @@ public class Application {
         List<Double> prezzi = MediaimportoOrdini.stream().flatMap(stream -> stream).toList();
         double mediaPrezzi = prezzi.stream().collect(Collectors.averagingDouble(Double::doubleValue));
         System.out.println("la media di tutti gli ordini è: " + mediaPrezzi);
+        System.out.println("---------------------------------");
 
+        //Esercizio 5
+        
 
     }
 }
